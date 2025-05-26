@@ -1,0 +1,827 @@
+= Generell_Innkomstjurnal_KursOslo
+
+
+== Metadata
+
+
+TemplateId:: no.nrua::openEHR-EHR-COMPOSITION.innkomst.kurs.oslo25.v1.0.1
+
+
+Archetype:: openEHR-EHR-COMPOSITION.encounter.v1
+
+
+
+
+:toc:
+
+
+
+
+// Not supported rmType COMPOSITION
+== EVENT_CONTEXT
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*EVENT_CONTEXT* + 
+EVENT_CONTEXT: __
+|====
+== Anamnese
+== Problemstilling/Kontaktårsak
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Problemstilling/Kontaktårsak* + 
+EVALUATION: _openEHR-EHR-EVALUATION.reason_for_encounter.v1_
+|at0004| 0..1| DV_CODED_TEXT | Klinisk kontaktårsak
+a|
+* Screening (kontaktaarsak: 1)
+* Sypmptomer (kontaktaarsak: 2)
+* Tilfeldig funn v/bildediagnostikk (kontaktaarsak: 3)
+* Kontroll (kontaktaarsak: 4)
+
+
+Koding av "Klinisk problemstilling" med en terminologi foretrekkes når mulig. Kliniske årsaker kan omfatte helseproblemer, symptomer, eller fysiske sykdomstegn. Eksempler: Helseproblemer - ønske om å slutte å røyke eller vold i hjemmet, symptomer - magesmerter eller kortpusthet, fysiske sykdomstegn - endret bevissthetsnivå. "Hovedproblemstilling" kan bli benyttet som et synonym for "Klinisk kontaktårsak" i templater.
+|====
+== Sosialt
+== Juridisk sivilstatus
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Juridisk sivilstatus* + 
+EVALUATION: _openEHR-EHR-EVALUATION.social_network.v1_
+|at0002| 0..1| DV_CODED_TEXT | Juridisk sivilstand
+a|
+* Ugift (juridisk_sivilstand: 1)
+* Gift//registrert partner (juridisk_sivilstand: 2)
+* Enke/enkemann/gjenlevende partner (juridisk_sivilstand: 3)
+* Skilt (juridisk_sivilstand: 4)
+* Separert (juridisk_sivilstand: 5)
+* Ukjent (juridisk_sivilstand: 9)
+
+
+Det anbefales å kode sivilstatus med en terminologi dersom mulig. Det er stor variasjon i verdisett som benyttes på tvers av jurisdiksjoner. Det finnes lokale, myndighetspålagte verdisett eller terminologier som for eksempel SNOMED CT eller lignende. For eksempel Ugift, Gift, Registrert partner, Samboer, Skilt, Enke, Enkemann, Enslig.
+|at0018| 0..1| DV_TEXT | Kommentar
+a|
+|at0011| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+
+
+Det antas at det ved implementasjon legges til rette for at denne datoen bli oppdatert dersom en tilknyttet "Person"- eller "Organisasjons"- arketype legges til eller oppdateres.
+|====
+== Samlivsstatus
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Samlivsstatus* + 
+EVALUATION: _openEHR-EHR-EVALUATION.social_network.v1_
+|at0002| 0..1| DV_CODED_TEXT | Samlivsstatus
+a|
+* Ugift/enslig (samlivsstatus: 1)
+* Gift/samboer/registrert partner (samlivsstatus: 2)
+* Enke/enkemann/gjenlevende partner eller samboer (samlivsstatus: 3)
+* Skilt/separert (samlivsstatus: 4)
+* Ukjent (samlivsstatus: 9)
+
+
+Det anbefales å kode sivilstatus med en terminologi dersom mulig. Det er stor variasjon i verdisett som benyttes på tvers av jurisdiksjoner. Det finnes lokale, myndighetspålagte verdisett eller terminologier som for eksempel SNOMED CT eller lignende. For eksempel Ugift, Gift, Registrert partner, Samboer, Skilt, Enke, Enkemann, Enslig.
+|at0018| 0..1| DV_TEXT | Kommentar
+a|
+|at0011| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+
+
+Det antas at det ved implementasjon legges til rette for at denne datoen bli oppdatert dersom en tilknyttet "Person"- eller "Organisasjons"- arketype legges til eller oppdateres.
+|====
+== Kartlegging samlivsform
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kartlegging samlivsform* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.social_context_screening.v1_
+|at0034| 0..1| DV_TEXT | Kartleggingsformål
+a|
+* Innkomst
+
+
+Dette dataelementet er ment for å sette en kontekst for samlingen av spørsmål/svar til bruk senere for å gjøre spørringer på dataene. Det er ikke forventet at dette dataelementet skal være synlig for en bruker av skjemaet, men kun tilgjengelig i de lagrede dataene. For eksempel: "Preoperativ screening" eller navnet på det faktiske spørreskjemaet.
+5+a|*Spesifikt sosialt forhold* + 
+CLUSTER: _at0022_
+|at0004| 1..1| DV_CODED_TEXT | Hvilken samlivsform har pasienten?
+a|
+* Bor alene (Inkl. Alene med barn <18). (samlivsform: 1)
+* Bor med noen (Partner og/eller barn >18 år, bofelleskap, venner). (samlivsform: 2)
+* Bor på institusjon/ sykehjem (Fast plass, ikke korttidsopphold. Gjelder også der egen bolig er døgnbemannet). (samlivsform: 3)
+* Ukjent (samlivsform: 9)
+
+
+Dette elementet tilbyr valg mellom fritekst og kodet tekst. Det er antatt at listen av kodede verdier vil vokse ettersom man identifiserer flere behov. Det er anbefalt å kode "Sosialt forhold" med en terminologi dersom det er mulig - for eksempel relevante termer innen hierarkiet til SNOMED CT's Social context finding hierarchy (SCTID: 108329005). Alternativt som fritekst, for eksempel "Forsørgelsesbyrde", "Sosial isolasjon", "Diskriminering", "Minoritetsstress".
+|at0005| 0..1| DV_BOOLEAN | Tilstede?
+|
+
+
+I templat vil navnet på dataelementet normalt omformuleres til det spesifikke spørsmålet. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0025| 0..1| DV_TEXT | Kommentar
+a|
+|====
+== Utdanningsnivå
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Utdanningsnivå* + 
+EVALUATION: _openEHR-EHR-EVALUATION.education_summary.v1_
+|at0002| 0..1| DV_CODED_TEXT | Høyeste fullførte utdanningsnivå
+a|
+* Ingen utdanning (utdanning: 0)
+* Grunnskole (utdanning: 1)
+* Videregående (utdanning: 2)
+* Universitet/Høyskole <4 år (utdanning: 3)
+* Universitet/Høyskole ≥4 år (utdanning: 4)
+* Ukjent (utdanning: 9)
+
+
+Koding av "Høyeste fullførte utdanningsnivå" med en terminologi er anbefalt der det er mulig. For eksempel med NUS 2000 eller Unescos ISCED klassifikasjon. Sistnevnte forefinnes ikke på norsk, men eksempel er "'Upper secondary vocational education"; "Post-secondary non-tertiary vocational education"; "Bachelor’s or equivalent level, professional"; "Doctoral or equivalent level, academic"; "Post-secondary non-tertiary vocational education"; or "Never attended an educational program".
+|at0007| 0..1| DV_TEXT | Kommentar
+a|
+|at0028| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+
+
+Ved implementering av arketypen forutsettes det at dersom en utdanning eller opplæring legges til eller oppdateres i CLUSTER.education_record (Utdanning), vil også denne datoen oppdateres.
+|====
+== Arbeidsstatus
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Arbeidsstatus* + 
+EVALUATION: _openEHR-EHR-EVALUATION.occupation_summary.v1_
+|at0004| 0..1| DV_CODED_TEXT | Arbeidsstatus
+a|
+* I arbeid (arbeidsstatus: 1)
+* Ikke i arbeid (arbeidsstatus: 2)
+* Alderspensjonist (arbeidsstatus: 3)
+* Under utdanning/studerer (arbeidsstatus: 4)
+* Ukjent (arbeidsstatus: 9)
+
+
+For eksempel: "Inntektsgivende arbeid", "Arbeidsledig", "Pensjonist". Koding med en terminologi er ønskelig, der det er mulig, for eksempel OID 8150 (Volven.no). Detaljene om hver enkel jobb/ rolle kan registreres i arketypen CLUSTER.occupation_record (Arbeidsforhold/rolle).
+|at0006| 0..1| DV_TEXT | Kommentar
+a|
+|at0009| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+
+
+Ved implementering av arketypen forutsettes det at dersom en arbeidsepisode legges til eller oppdateres, vil også denne datoen oppdateres.
+|====
+== Stimulantia
+== Alkohol
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Alkohol* + 
+EVALUATION: _openEHR-EHR-EVALUATION.alcohol_consumption_summary.v1_
+|at0089| 0..1| DV_CODED_TEXT | Overordnet status
+a|
+* at0003 -> Nåværende bruker 
+* at0005 -> Tidligere bruker 
+* at0006 -> Aldri brukt 
+|at0043| 0..1| DV_TEXT | Beskriv alkoholbruk
+a|
+
+
+Bruk dette elementet for å registrere en beskrivelse i fritekst om drikkevaner for dette individet, eller for å overføre til arketypeformat ustrukturert informasjon om drikkevaner fra et eksisterende eller tidligere brukt klinisk system.
+5+a|*Per episode* + 
+CLUSTER: _at0064_
+|at0023| 0..1| DV_QUANTITY | Typisk bruk (alkoholenheter)
+|
+|at0022| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Røyk
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Røyk* + 
+EVALUATION: _openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1_
+|at0089| 0..1| DV_CODED_TEXT | Overordnet status
+a|
+* at0006 -> Aldri røykt 
+* at0003 -> Røyker 
+* at0005 -> Tidligere røyker 
+|at0043| 0..1| DV_TEXT | Beskrivelse røykevaner
+a|
+
+
+Bruk dette datalementet til å registrere en fritekstbeskrivelse av individets tobakksrøykevaner, eller for å overføre ustrukturert informasjon fra eksisterende eller tidligere kliniske systemer til arketypeformat.
+|at0074| 0..1| DV_COUNT | Samlet pakkeår
+|
+
+
+Definisjonen på en pakke kan registreres i protokollen av denne arketypen, ved å bruke dataelementet "Pakkedefinisjon".
+|at0022| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Røykfri tobakk
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Røykfri tobakk* + 
+EVALUATION: _openEHR-EHR-EVALUATION.smokeless_tobacco_summary.v1_
+|at0089| 0..1| DV_CODED_TEXT | Overordnet status
+a|
+* at0006 -> Aldri brukt 
+* at0003 -> Nåværende bruker 
+* at0005 -> Tidligere bruker 
+|at0043| 0..1| DV_TEXT | Beskrivelse vaner
+a|
+
+
+Bruk dette datalementet til å registrere en fritekstbeskrivelse kun der data som er registrert strukturert ikke reflekterer individets bruk av røykfri tobakk på en tilfredsstillende måte, eller for å overføre ustrukturert informasjon om bruk av røykfri tobakk fra eksisterende eller tidligere kliniske systemer til arketypeformat.
+|at0022| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Kartleggin om bruk av andre typer stimulantia
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kartleggin om bruk av andre typer stimulantia* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.substance_use_screening.v1_
+|at0040| 0..1| DV_TEXT | Kartleggingsformål
+a|
+* Innkomst
+
+
+Dette dataelementet er ment for å sette en kontekst for spørsmålene om man senere ønsker å gjøre spørringer på dataene. Det er ikke forventet at dette dataelementet skal være synlig for en bruker av skjemaet, men kun tilgjengelig i de lagrede dataene. For eksempel: "Preoperativ screening" eller navnet på det faktiske spørreskjemaet.
+|at0052| 0..1| DV_CODED_TEXT | Bruker pasienten noen andre substanser?
+a|
+* at0053 -> Ja 
+* at0054 -> Nei 
+* at0055 -> Ukjent 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0042| 0..1| DV_TEXT | Beskrivelse
+a|
+|====
+== Familieanamnese/herdiditet
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Familieanamnese/herdiditet* + 
+EVALUATION: _openEHR-EHR-EVALUATION.family_history.v2_
+|at0002| 0..1| DV_TEXT | Sammendrag
+a|
+
+
+Bruk dette feltet for å registrere et sammmendrag eller konklusjon, eller for å importere tekstlige data fra eksisterende/tidligere kliniske system.
+|at0026| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Kartlegging tidligere sykdom
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kartlegging tidligere sykdom* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.problem_screening.v1_
+
+
+Svarene kan være selvrapporterte.
+|at0034| 0..1| DV_TEXT | Kartleggingsformål
+a|
+* Innkomst
+
+
+Dette dataelementet er ment for å sette en kontekst for spørsmålene, dersom man senere ønsker å gjøre spørringer på dataene. Det er ikke forventet at dette dataelementet skal være synlig for en bruker av skjemaet, men kun tilgjengelig i de lagrede dataene. For eksempel: "Preoperativ screening" eller navnet på det faktiske spørreskjemaet.
+|at0028| 0..1| DV_CODED_TEXT | Har pasient kjent komorbiditet?
+a|
+* at0031 -> Ja 
+* at0032 -> Nei 
+* at0033 -> Ukjent 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0043| 0..1| DV_TEXT | Overordnet merknad komorbiditet
+a|
+|====
+== Aktuelt/anamnese
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Aktuelt/anamnese* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.story.v1_
+|at0004| 0..1| DV_TEXT | Aktuelt/Anamnese
+a|
+5+a|*Symptom/Sykdomstegn* + 
+CLUSTER: _openEHR-EHR-CLUSTER.symptom_sign.v2_
+|at0001| 1..1| DV_CODED_TEXT | Navn på symptom/sykdomstegn
+a|
+* smerter (SNOMED-CT: 22253000)
+* nevrologisk symptom (SNOMED-CT: 308921004)
+* vekttap (SNOMED-CT: 89362005)
+
+
+Navnet på symptom/sykdomstegn bør kodes med en terminologi om mulig.
+|at0002| 0..1| DV_TEXT | Beskrivelse
+a|
+
+
+Eksempel: "Svimmelhet med rotasjonsfølelse og av og til besvimelsesfølelse. Hurtig bevegelse fra sittende eller liggende til stående stilling virker å være en utløsende faktor. Opptrer typisk flere ganger daglig, og varer i ca et halvt til ett minutt hver gang. Å sette eller legge seg ned virker lindrende."
+|====
+== Naturlige funksjoner
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Naturlige funksjoner* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.progress_note.v1_
+|at0004| 0..1| DV_TEXT | Naturlige funksjoner
+a|
+|====
+== Kartlegging medikamenter - skal føres i medikamentmoduler
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kartlegging medikamenter - skal føres i medikamentmoduler* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.medication_screening.v1_
+
+
+Svarene kan være selvrapporterte.
+|at0040| 0..1| DV_TEXT | Kartleggingsformål
+a|
+* Innkomst
+
+
+Dette dataelementet er ment for å sette en kontekst for spørsmålene om man senere ønsker å gjøre spørringer på dataene. Det er ikke forventet at dette dataelementet skal være synlig for en bruker av skjemaet, men kun tilgjengelig i de lagrede dataene. 
+For eksempel: "Preoperativ screening" eller navnet på det faktiske spørreskjemaet eller screening for tidligere bruk av en legemiddelklasse, som bisfosfonater.
+|at0027| 0..1| DV_CODED_TEXT | Bruk av noen legemidler ved innkomst?
+a|
+* at0028 -> Ja 
+* at0029 -> Nei 
+* at0030 -> Usikker 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0027| 0..1| DV_CODED_TEXT | Er det gjort legemiddelsammstemming?
+a|
+* at0028 -> Ja 
+* at0029 -> Nei 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0043| 0..1| DV_TEXT | Beskrivelse legemiddel
+a|
+|====
+== Legemiddelsammendrag (hivs du vil legge til ett og ett legemiddel)
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Legemiddelsammendrag (hivs du vil legge til ett og ett legemiddel)* + 
+EVALUATION: _openEHR-EHR-EVALUATION.medication_summary.v1_
+|at0002| 1..1| DV_TEXT | Navn på legemiddel
+a|
+
+
+Navn på legemiddel kan representeres som en generisk substans, handelsnavn, gruppe eller klasse av legemidler. Det anbefales å kode "Navn på legemiddel" med en terminologi om mulig, slik at det kan brukes for eksempel i beslutningsstøtte. Fritekst bør bare benyttes der det ikke finnes en passende terminologi.
+For eksempel: '"Adriamycin"; "doxorubicin" eller "anthracycliner"; "Fosamax", "alendronsyre" eller "bifosonater".
+|====
+== Kartlegging om allergi - føres inn i kritisk info
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kartlegging om allergi - føres inn i kritisk info* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.problem_screening.v1_
+
+
+Svarene kan være selvrapporterte.
+|at0034| 0..1| DV_TEXT | Kartleggingsformål
+a|
+* Innkomst
+
+
+Dette dataelementet er ment for å sette en kontekst for spørsmålene, dersom man senere ønsker å gjøre spørringer på dataene. Det er ikke forventet at dette dataelementet skal være synlig for en bruker av skjemaet, men kun tilgjengelig i de lagrede dataene. For eksempel: "Preoperativ screening" eller navnet på det faktiske spørreskjemaet.
+|at0028| 0..1| DV_CODED_TEXT | Har pasienten noen kjente allergier?
+a|
+* at0031 -> Ja 
+* at0032 -> Nei 
+* at0033 -> Ukjent 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0028| 0..1| DV_CODED_TEXT | Er allergier ført opp i kritisk info?
+a|
+* at0031 -> Ja 
+* at0032 -> Nei 
+
+
+Navnet på dataelementet kan omformuleres til det spesifikke spørsmålet i et templat eller brukergrensesnitt. Det foreslåtte verdisettet kan tilpasses/endres i det enkelte bruksområde ved å benytte de alternative datatypene DV_TEXT eller DV_BOOLEAN.
+|at0043| 0..1| DV_TEXT | Beskrivelse ovrfølsomhetsreaksjon
+a|
+|====
+== Risiko for overfølsomhetsreaksjon (hvis du vil legge til ett og ett substans)
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Risiko for overfølsomhetsreaksjon (hvis du vil legge til ett og ett substans)* + 
+EVALUATION: _openEHR-EHR-EVALUATION.adverse_reaction_risk.v2_
+
+
+Substanser omfatter men er ikke begrenset til: terapeutiske substanser korrekt administrert ved en passende dose for individet, mat, materiale fra planter eller dyr, eller gift fra insektstikk.
+|at0002| 1..1| DV_TEXT | Substans
+a|
+
+
+Feltet tillater en registrering av enten en spesifikk substans eller en substansklasse. En substans kan være en blanding av enkeltsubstanser, for eksempel et legemiddelprodukt. Det er sterkt anbefalt at "Substans" kodes med en terminologi som kan utløse beslutningsstøtte, der det er mulig. For eksempel: FEST, ATC eller SNOMED CT. Fritekst bør bare brukes hvis en hensiktsmessig terminologi ikke er tilgjengelig.
+|at0063| 0..1| DV_CODED_TEXT | Verifikasjonsstatus
+a|
+* at0064 -> Ubekreftet 
+* at0065 -> Bekreftet 
+* at0066 -> Avkreftet 
+
+
+Beslutningsstøttesystemer vil typisk reagere på statusene "Ubekreftet" og "Bekreftet", og ignorere "Avkreftet". Kliniske systemer kan velge å ikke vise overfølsomhetsreaksjoner som har status "Avkreftet" i listen over overfølsomhetsreaksjoner. Imidlertid kan "Avkreftet" være nyttig for samstemming av listen over overfølsomhetsreaksjoner, eller ved kommunikasjon mellom systemer. Noen implementasjoner kan velge å gjøre dette elementet obligatorisk. Fritekst-datatypen tillater lokal variasjon ved å gjøre det mulig å legge til andre verdisett i et templat. I disse tilfellene er det anbefalt at verdiene kodes med en terminologi.
+|at0101| 0..1| DV_CODED_TEXT | Alvorlighetsgrad
+a|
+* at0102 -> Lav 
+* at0103 -> Høy 
+* at0124 -> Ubestemt 
+
+
+Dette kan ses på som en vurdering av et "worst case scenario". I de fleste kontekster vil "Lav" være en standardverdi.
+|at0062| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Status presens
+== Status presens generell beskrivelse
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Status presens generell beskrivelse* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.progress_note.v1_
+|at0004| 0..1| DV_TEXT | Status presens
+a|
+|====
+== Vitale målinger
+== Høyde/Lengde
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Høyde/Lengde* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.height.v2_
+
+
+Høyde måles stående og lengde liggende.
+|at0004| 1..1| DV_QUANTITY | Høyde (cm)
+|
+|====
+== Kroppsvekt
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kroppsvekt* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.body_weight.v2_
+|at0004| 1..1| DV_QUANTITY | Vekt (kg)
+|
+|====
+== Kroppsmasseindeks
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kroppsmasseindeks* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.body_mass_index.v2_
+|at0004| 1..1| DV_QUANTITY | Kroppsmasseindeks
+|
+|====
+== Kroppstemperatur
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Kroppstemperatur* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.body_temperature.v2_
+// Not supported rmType POINT_EVENT
+|at0004| 1..1| DV_QUANTITY | Temperatur (°C)
+|
+|undefined| 1..1| DV_DATE_TIME | Time
+|
+|====
+== Pulsoksymetri
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Pulsoksymetri* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.pulse_oximetry.v1_
+// Not supported rmType DV_PROPORTION
+|====
+== Åndedrett
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Åndedrett* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.respiration.v2_
+|at0004| 0..1| DV_QUANTITY | Respirasjonsfrekvens (/min)
+|
+|at0005| 0..1| DV_CODED_TEXT | Regelmessighet
+a|
+* at0006 -> Regelmessig 
+* at0007 -> Uregelmessig 
+|====
+== Blodtrykk
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Blodtrykk* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.blood_pressure.v2_
+
+
+Vanligvis brukes begrepet "blodtrykk" om måling av brakialt arterietrykk i overarmen.
+|at0004| 0..1| DV_QUANTITY | Systolisk blodtrykk
+|
+|at0005| 0..1| DV_QUANTITY | Diastolisk blodtrykk
+|
+|at0008| 0..1| DV_CODED_TEXT | Stilling
+a|
+* at1001 -> Sittende 
+* at1003 -> Liggende 
+|====
+== Puls/Hjertefrekvens
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Puls/Hjertefrekvens* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.pulse.v2_
+|at0004| 0..1| DV_QUANTITY | Hjertefrekvens (/min)
+|
+
+
+Det er spesifisert begrensninger i navn for å gjøre det lettere å eksplisitt merke dette elementet som Pulsfrekvens eller Hjertefrekvens ved behov.
+|====
+== Fysisk undersøkelse
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Fysisk undersøkelse* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.exam.v1_
+|at0004| 0..1| DV_TEXT | Overordnet beskrivelse av fysisk undersøkelse
+a|
+
+
+Kan anvendes til å registrere en tekstlig sammenfatning av en komplett klinisk undersøkelse eller nøkkelfunn ved den kliniske undersøkelsen, som vil bli understøttet av strukturerte data. Dette dataelementet kan brukes for å fange opp "legacy data" som ikke er tilgjengelig i et strukturert format. Detaljer om spesifikt strukturert funn inkluderes ved å bruke CLUSTER-arketyper i "Examination Detail" SLOT.
+5+a|*Pupille* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Pupille
+a|
+* Pupille (SNOMED-CT: 392406005)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Cavum oris (munnhule)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Cavum oris (munnhule)
+a|
+* cavum oris (munnhule) (SNOMED-CT: 74262004)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Pulm (lunge)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Pulm (lunge)
+a|
+* Pulm (lunge) (SNOMED-CT: 39607008)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Cor (hjerte)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Cor (hjerte)
+a|
+* Cor (hjerte) (SNOMED-CT: 80891009)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Thorax (brystkassen, inkl mammae)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Thorax (brystkassen, inkl mammae)
+a|
+* Thorax (SNOMED-CT: 51185008)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Collum (halsen)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Collum (halsen)
+a|
+* Collum (hals) (SNOMED-CT: 45048000)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Columna (ryggsøylen)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Columna (ryggsøylen)
+a|
+* Columna vertebralis (ryggsøyle) (SNOMED-CT: 421060004)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Abdomen (magen/buken)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Abdomen (magen/buken)
+a|
+* Abdomen (buk) (SNOMED-CT: 818983003)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Rektaleksplorasjon (Undersøkelse av endetarmen)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Rectum
+a|
+* Rectum (SNOMED-CT: 34402009)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Genitalia externa (menn)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Genitalia externa
+a|
+* Genitalia externa (SNOMED-CT: 77142006)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Genitalia kvinner (GU)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Genitalia kvinner
+a|
+* Kvinnelig genitalia (SNOMED-CT: 127882003)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Ekstremiteter (armer/ben)* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Ekstremiteter (armer/ben)
+a|
+* Ekstremitet (SNOMED-CT: 66019005)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Orienterende nevrologi* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_CODED_TEXT | Orienterende nevrologi
+a|
+* Nevrologisk vurdering (orienterende nevrologi) (SNOMED-CT: 225398001)
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+5+a|*Status localis* + 
+CLUSTER: _openEHR-EHR-CLUSTER.exam.v2_
+|at0001| 1..1| DV_TEXT | Status localis
+a|
+* Status localis
+
+
+Det anbefales å kode organsystem eller den anatomiske strukturen med en terminologi dersom mulig.
+|at0003| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+|====
+== Resymé, vurdering og tiltak
+== Sammendrag/resymé
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Sammendrag/resymé* + 
+EVALUATION: _openEHR-EHR-EVALUATION.clinical_synopsis.v1_
+|at0002| 1..1| DV_TEXT | Sammendrag/resymé
+a|
+|====
+== Problem/diagnose
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Problem/diagnose* + 
+EVALUATION: _openEHR-EHR-EVALUATION.problem_diagnosis.v1_
+
+
+Det er i praksis ikke lett å oppnå et klart skille mellom et problem og en diagnose. I klinisk dokumentasjon med denne arketypen ses problem og diagnose som et kontinuum, med økende krav til detaljer og støttende evidens for å underbygge en diagnose.
+|at0002| 1..1| DV_TEXT | Problem/diagnosenavn
+a|
+
+
+Koding av navnet på problemet eller diagnosen med en terminologi er foretrukket hvis mulig.
+|at0009| 0..1| DV_TEXT | Klinisk beskrivelse
+a|
+
+
+Brukes til å gi bakgrunn og kontekst, inkludert utvikling, episoder eller forverringer, fremgang og alle andre relevante detaljer, om problemet eller diagnosen.
+|at0012| 0..*| DV_TEXT | Anatomisk lokalisering
+a|
+
+
+Koding av navnet på den anatomiske lokaliseringen ved hjelp av en terminologi er foretrukket når dette er mulig. 
+Bruk dette dataelementet for å registrere prekoordinerte anatomiske lokaliseringer. Dersom behovene for å registrere anatomisk sted bestemmes i applikasjonen eller trenger større grad av kompleksitet som f.eks. relativ lokalisering, er det anbefalt å bruke CLUSTER.anatomical_location eller CLUSTER.relative_location innenfor SLOTet "Strukturert anatomisk lokalisering" i denne arketypen. Dette dataelementet kan ha ubegrenset antall forekomster, for å gjøre det mulig å registrere kliniske scenarier som f.eks. å beskrive et utslett som opptrer flere steder på kroppen, men der alle andre attributter er identiske. Dersom den anatomiske lokaliseringen inkluderes i feltet "Problem/diagnosenavn" via prekoordinerte koder blir dette dataelementet overflødig.
+|at0073| 0..1| DV_CODED_TEXT | Diagnostisk sikkerhet
+a|
+* at0074 -> Mistenkt 
+* at0075 -> Sannsynlig 
+* at0076 -> Bekreftet 
+
+
+Hvis et alternativt verdisett er nødvendig, kan disse verdiene legges til DV_TEXT-datatypen i et templat.
+|at0070| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Differensialdiagnoser
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Differensialdiagnoser* + 
+EVALUATION: _openEHR-EHR-EVALUATION.differential_diagnoses.v1_
+|at0002| 0..1| DV_TEXT | Overordnet beskrivelse
+a|
+5+a|*Differensialdiagnose* + 
+CLUSTER: _at0003_
+|at0004| 1..1| DV_TEXT | Diagnosenavn
+a|
+
+
+Koding av navnet på differensialdiagnosen med en terminologi foretrekkes der det er mulig.
+|at0005| 0..1| DV_CODED_TEXT | Status
+a|
+* at0006 -> Mulig 
+* at0007 -> Godtatt 
+* at0008 -> Utelukket 
+
+
+Hvis du bruker det foreslåtte verdisettet, betraktes "Mulig" som standard inntil hver diagnose enten får status "Godtatt" eller "Utelukket". Dersom en diagnose settes til status "Godtatt" er det sannsynlig at den enten vil bli lagt til manuelt eller automatisk i journalen ved bruk av arketypen EVALUATION.problem_diagnosis (Problem/diagnose).
+|at0015| 0..1| DV_DATE_TIME | Sist oppdatert
+|
+|====
+== Funn ved supplerende underøskelser (lab/rad)
+== Laboratorieresultat
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Laboratorieresultat* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.laboratory_test_result.v1_
+|at0005| 1..1| DV_TEXT | Laboratorieundersøkelser
+a|
+* laboratorieundersøkelse
+
+
+Undersøkelsesnavnet kan dekke ett enkelt resultat eller en gruppe av resultater. Undersøkelsesnavnet kan kodes med medisinsk kodeverk som for eksempel NLK (Norsk laboratoriekodeverk), LOINC, SNOMED CT eller lokale laboratoriekodeverk. Eksempler kan være "Glukose", "Elektrolytter", "Blodgass", "Differensialtelling", "Dyrkning", "Kortisol (morgen)" eller "histologi melanom". Navnet kan noen ganger inneholde typen prøvemateriale og/eller pasientstatus, for eksempel "fastende blodglukose" "Kalium i svette", eller inneholde annen informasjon, som "Kalium (PNA blodgass)".
+|at0057| 0..1| DV_TEXT | Laboratoriesvar konklusjon
+a|
+
+
+For eksempel "mønsteret indikerer betydelig nedsatt nyrefunksjon". Innholdet av konklusjonen vil variere, basert på hvilken undersøkelse som er utført. Konklusjonen bør være i overensstemmelse med kodene brukt i elementet "Diagnose".
+|====
+== Bildediagnostisk svar
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Bildediagnostisk svar* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.imaging_exam_result.v1_
+|at0004| 1..1| DV_TEXT | Bildediagnostisk undersøkelse
+a|
+* Bildediagnostisk undersøkels
+
+
+For eksempel: "CT abdomen", "Doppler ultralyd av nyrearterier", "Røntgen thorax". Det anbefales sterkt å bruke en terminologi der det er mulig, fortrinnsvis en kode som både spesifiserer modalitet og anatomisk lokalisering. Mulige terminologier er NCRP, LOINC, SNOMED CT eller RadLex. Vanligvis tilsvarende FIHR DiagnosticReport.code.
+|at0021| 0..1| DV_TEXT | Resymé bildediagnostikk
+a|
+
+
+Også referert til som "Sammendrag" eller "Funn og undersøkelsesresultat". Vanligvis tilsvarerende FHIR DiagnosticReport.conclusion.
+|====
+== Tiltak og videre plan
+[options="header", cols="3,3,5,5,30"]
+|====
+|NodeId|Attr.|RM Type| Name |Description
+5+a|*Tiltak og videre plan* + 
+OBSERVATION: _openEHR-EHR-OBSERVATION.progress_note.v1_
+|at0004| 0..1| DV_TEXT | Tiltak og videre plan
+a|
+|====
+// Not supported rmType CODE_PHRASE
+// Not supported rmType CODE_PHRASE
+// Not supported rmType PARTY_PROXY
